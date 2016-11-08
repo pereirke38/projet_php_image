@@ -14,10 +14,11 @@ class Login {
     }
     
     public function index() {
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $size = 480;
-        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
         if(isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
@@ -29,6 +30,7 @@ class Login {
     }
     
     public function login() {
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_POST['pseudo']) && isset($_POST['password'])) {
             $utilisateur = $this->utilisateurDAO->getUserByPseudo($_POST['pseudo']);
             if($utilisateur != NULL && $_POST['password'] == $utilisateur->getPassword()){
@@ -37,7 +39,7 @@ class Login {
                 $data->menu['Home'] = "index.php";
                 $data->menu['A Propos'] = "index.php?action=aPropos";
                 $size = 480;
-                $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+                $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
                 if(isset($_SESSION['id'])) {
                     $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                     $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
@@ -52,7 +54,7 @@ class Login {
                 $data->menu['Home'] = "index.php";
                 $data->menu['A Propos'] = "index.php?action=aPropos";
                 $size = 480;
-                $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+                $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
                 if(isset($_SESSION['id'])) {
                     $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                     $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
@@ -66,7 +68,7 @@ class Login {
             $data->menu['Home'] = "index.php";
             $data->menu['A Propos'] = "index.php?action=aPropos";
             $size = 480;
-            $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+            $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
             if(isset($_SESSION['id'])) {
                 $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                 $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
@@ -78,12 +80,13 @@ class Login {
         }
     }
     public function deconnexion() {
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $_SESSION = array();
         session_destroy();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $size = 480;
-        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
         if(isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";

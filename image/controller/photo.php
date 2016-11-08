@@ -13,14 +13,17 @@ class Photo {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
+        } else {
+            $imgId = $firstImageId;
         }
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
-        $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=1&nbImg=2";
+        $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&$firstImageId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
         $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
         if (isset($_SESSION['id'])) {
@@ -36,9 +39,9 @@ class Photo {
         } else {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
-        $data->imageURL = $this->imageDAO->getFirstImage()->getPath();
+        $data->imageURL = $this->imageDAO->getImage($firstImageId)->getPath();
         $data->NextImgId = $this->imageDAO->getNextImage($this->imageDAO->getFirstImage())->getId();
-        $data->PrevImgId = $this->imageDAO->getNextImage($this->imageDAO->getFirstImage())->getId();
+        $data->PrevImgId = $this->imageDAO->getPrevImage($this->imageDAO->getFirstImage())->getId();
         $data->content = 'photoView.php';
         require_once 'view/mainView.php';
     }
@@ -50,9 +53,10 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -84,9 +88,10 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -115,14 +120,17 @@ class Photo {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
+        } else {
+           $imgId = $firstImageId;
         }
         $img = $this->imageDAO->getRandomImage();
         $imgId = $img->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -154,9 +162,10 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -189,9 +198,10 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -225,9 +235,10 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
@@ -254,15 +265,19 @@ class Photo {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
         else {
             $this->First();
+            $imgId = $firstImageId;
+            $_GET["imgId"] = $firstImageId;
         }
+        
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;

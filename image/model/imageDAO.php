@@ -106,7 +106,11 @@
 		
 		# Retourne l'objet de la premiere image
 		public function getFirstImage() {
-                    return $this->getImage(1);
+                    $i = 1;
+                    while($this->getImage($i) == NULL) {
+                        $i++;
+                    }
+                    return $this->getImage($i);
 		}
 		
 		# Retourne l'image suivante d'une image
@@ -128,7 +132,7 @@
 		# Retourne l'image précédente d'une image
 		public function getPrevImage(image $img) {
 			$id = $img->getId();
-                        if ($id > 1) {
+                        if ($id > $this->getFirstImage()->getId()) {
                                 $img = $this->getImage($id-1);
                                 if($img == NULL) {
                                     $i = 1;

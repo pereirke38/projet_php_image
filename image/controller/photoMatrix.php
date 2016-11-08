@@ -107,8 +107,11 @@ class PhotoMatrix {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
         }
+        $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
+        } else {
+            $imgId = $firstImageId;
         }
         if(isset($_GET["nbImg"])) {
             $nbImg = $_GET["nbImg"];

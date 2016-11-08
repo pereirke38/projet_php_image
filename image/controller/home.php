@@ -14,7 +14,7 @@ class Home {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $size = 480;
-        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&&size=$size";
         if(!isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
@@ -30,7 +30,7 @@ class Home {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $size = 480;
-        $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=1&size=$size";
+        $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=$size";
         if(!isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
