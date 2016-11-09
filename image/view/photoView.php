@@ -7,7 +7,7 @@
                                 if(isset($_GET["size"])) {
                                     $size = $_GET["size"];
                                 }
-				print "<img src=\"$data->imageURL\" width=$size\"\n";
+				print "<img id=\"singlePicture\" src=\"$data->imageURL\" width=$size\"/>";
 			?>		
 </div>
 

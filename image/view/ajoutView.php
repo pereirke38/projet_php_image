@@ -5,7 +5,10 @@
         <input type="file" name="newPicture" id="newPicture" /><br />
         <input type="submit" name="submit" value="Envoyer" />
     </form>
-    <?php if (isset($data->msgUpload)) {
-        echo "<br /><br /><p>".$data->msgUpload."</p>";
-    } ?>
+    <?php
+        #Vérifie si msgUpload existe
+        if (isset($data->msgUpload)) {
+            echo "<br /><br /><p>".$data->msgUpload."</p>";
+        } 
+    ?>
 </div>

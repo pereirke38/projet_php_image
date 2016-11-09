@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'model/imageDAO.php';
 class PhotoMatrix {
     
@@ -9,6 +8,7 @@ class PhotoMatrix {
         $this->imageDAO = new imageDAO();
     }
     
+    #Retourne à la 1 + n images
     function First() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -39,6 +39,7 @@ class PhotoMatrix {
         require_once 'view/mainView.php';
     }
     
+    #Récupre et affiche les n suivantes images
     function Next() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -69,6 +70,7 @@ class PhotoMatrix {
         require_once 'view/mainView.php';
     }
     
+    #Récupère et affiche les n précédentes images
     function Prev() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -99,6 +101,7 @@ class PhotoMatrix {
         require_once 'view/mainView.php';
     }
     
+    #Affiche 1 image et aléatoire et les n suivantes
     function Random() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -130,6 +133,7 @@ class PhotoMatrix {
         require_once 'view/mainView.php';
     } 
     
+    #Affiche n+1 images
     function more() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -164,6 +168,7 @@ class PhotoMatrix {
         require 'view/mainView.php';
     }
     
+    #Affiche n-1 images
     function less() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];

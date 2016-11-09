@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'model/imageDAO.php';
 class Photo {
         
@@ -9,6 +8,7 @@ class Photo {
         $this->imageDAO = new imageDAO();
     }
     
+    #Récupère la première image en base puis l'affiche
     function First() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -40,12 +40,15 @@ class Photo {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
         $data->imageURL = $this->imageDAO->getImage($firstImageId)->getPath();
+        #Récpère l'id de l'image suivante
         $data->NextImgId = $this->imageDAO->getNextImage($this->imageDAO->getFirstImage())->getId();
+        #Récupère l'id de l'image suivante
         $data->PrevImgId = $this->imageDAO->getPrevImage($this->imageDAO->getFirstImage())->getId();
         $data->content = 'photoView.php';
         require_once 'view/mainView.php';
     }
     
+    #Récupère et affiche l'image suivante
     function next() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -81,6 +84,7 @@ class Photo {
         require_once 'view/mainView.php';
     }
     
+    #Récupère et affiche l'image précedente
     function prev() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -116,6 +120,7 @@ class Photo {
         require_once 'view/mainView.php';
     }
     
+    #Récupère et affiche une image au hasard
     function Random() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -126,7 +131,9 @@ class Photo {
         } else {
            $imgId = $firstImageId;
         }
+        #Récupération de l'image au hasard
         $img = $this->imageDAO->getRandomImage();
+        #la variable $imgId prend la valeur de l'id de l'image choisieau hasard
         $imgId = $img->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
@@ -155,6 +162,7 @@ class Photo {
         require_once 'view/mainView.php';
     }
     
+    #Effectue un zoom sur une image
     function zoom() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -191,6 +199,7 @@ class Photo {
         
     }
     
+    #Effectue un dezzoom sur une image
     function dezoom() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -226,6 +235,7 @@ class Photo {
         require_once 'view/mainView.php';
     }
     
+    #Permet à un utilisateur connecté de supprimer une image lui appartenant
     function supprimer() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
@@ -242,10 +252,12 @@ class Photo {
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&imgId=$imgId&nbImg=2";
         $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;  
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        #On verifie si l'utilisateur est connecté pour afficher les boutons qui lui permet d'ajouter ou de consulter ses images
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
+            #On vérifie que l'image affichée appartient bien à l'utilisateur
             if($_SESSION['id'] == $this->imageDAO->getUtilisateur($this->imageDAO->getImage($imgId))){
                 $data->menu['Supprimer image'] = "index.php?controller=photo&action=supprimer&imgId=".$imgId;
             }
@@ -261,6 +273,8 @@ class Photo {
         require_once 'view/mainView.php';
     }
     
+    #Affiche une image en fonction de son id
+    #Si aucun id on affiche la première image
     function index() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];

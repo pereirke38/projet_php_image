@@ -69,6 +69,7 @@
                       $img = new Image($res['id'], $res['path']);
                       return $img;*/
                       $req = $s->fetchAll(PDO::FETCH_CLASS,"Image");
+                      #Si la requête ne retourne aucun résultat la fonction renvoie NULL
                       if (count($req) == 0) {
                           return NULL;
                       } else {
@@ -85,9 +86,13 @@
 		public function getRandomImage() {
 			/*trigger_error("Non réalisé");*/
                         $randId = rand(1,$this->size());
+                        #On vérifie que l'on récupère pas un objet NULL
                         if($this->getImage($randId) != NULL) {
                             return $this->getImage($randId);
                         } else {
+                            #Si l'image est NULL on récupère l'image d'id randId +i suivant si rand id est proche de la premières images
+                            #Si randId est plus proche de la dernière image on récupère l'image d'id randId - i
+                            #Tant que l'id randId + i ne correspond pas à l'id d'une image présente en base on augmente i
                             if($randId - 1 <= $this->size() - $randId) {
                                 $i = 1;
                                 while ($this->getImage($randId + $i)) {
@@ -181,14 +186,17 @@
 			return $res;
 		}
                 
+                #retourne l'id de l'utilisateur possédant l'image
                 public function getUtilisateur(Image $img) {
                     return $img->getUserId();
                 }
                 
+                #Supprime une image en fonction de son id
                 public function supprimerImage($imgId) {
                     $this->db->exec("DELETE FROM image WHERE id=".intval($imgId));
                 }
                 
+                #Récupère toute les images d'un utilisateur
                 public function getImageByUser($userId) {
                     $s = $this->db->query('SELECT * FROM image WHERE userId='.$userId);
                     if ($s) {

@@ -13,6 +13,7 @@
             }
         }
         
+        #Récupère un utilisateur en base en fonction de son id
         public function getUserById($id){
             $s = $this->db->query('SELECT * FROM utilisateur WHERE id='.$id);
             if($s) {
@@ -29,6 +30,7 @@
             }
         }
         
+        #Récupère un utilisateur en base en fonction de son pseudo
         public function getUserByPseudo($pseudo) {
             $s = $this->db->query('SELECT * FROM utilisateur WHERE pseudo=\''.$pseudo.'\'');
             if($s) {
@@ -45,6 +47,7 @@
             }
         }
         
+        #Crée un utilisateur
         public function createUser($pseudo,$password) {
             $this->db->exec("INSERT INTO utilisateur VALUES(null,'$pseudo','$password')");
         }

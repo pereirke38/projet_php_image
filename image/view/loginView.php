@@ -5,5 +5,10 @@
         <label for="password">Mot de passe : </label><input type="password" name="password"/>
         <input type="submit" value="Valider"/>
     </form>
+    <?php
+        if(isset($data->messageErreur)){
+            print "<p>".$data->messageErreur."</p>";
+        }
+    ?>
 </div>
 

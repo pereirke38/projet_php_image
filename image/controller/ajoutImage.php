@@ -1,8 +1,10 @@
 <?php
-session_start();
+# Récupération de l'objet data
 require_once 'data.php';
+#Récupération de imageDAO
 require_once 'model/imageDAO.php';
 
+#Controller gérant l'ajout d'images
 class AjoutImage {
 
     public function __construct() {
@@ -10,23 +12,34 @@ class AjoutImage {
     }
 
     function index() {
+        #Création d'un objet Data
         $data = new Data();
-        $data->content = "homeView.php";
+        #Création du bouton Home du menu
         $data->menu['Home'] = "index.php";
+        #Création du bouton A Propos du menu
         $data->menu['A Propos'] = "index.php?action=aPropos";
+        # définition de la taille par défaut des images
         $size = 480;
+        #Créer le bouton Voir Photos du menu qui permet d'accéder aux photos
         $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=$size";
+        #On vérifie qu'un utilisateur est connecté
+        #Si aucun utilisateur est connecté on crée les boutons Identification est S'inscrire
         if(!isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
+        #Sinon on crée un bouton déconnexion
         } else {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
+        #On récupère la vue correspondante
         $data->content = 'ajoutView.php';
+        #On rappelle la vue principale
         require_once "view/mainView.php";
     }
-
+    
+    #Fonction qui gère l'upload d'images
     function upload() {
+        #Création d'un objet Data
         $data = new Data();
 
         // Gère l'upload d'image
@@ -54,19 +67,26 @@ class AjoutImage {
                 $data->msgUpload = "Le type de fichier n'est pas valide";
             }
         }
-
-        $data->content = "homeView.php";
+        #Création du bouton Home du menu
         $data->menu['Home'] = "index.php";
+        #Création du bouton A propos du menu
         $data->menu['A Propos'] = "index.php?action=aPropos";
+        # définition de la taille par défaut des images
         $size = 480;
+        #Créer le bouton Voir Photos du menu qui permet d'accéder aux photos
         $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=$size";
+        #On vérifie qu'un utilisateur est connecté
+        #Si aucun utilisateur est connecté on crée les boutons Identification est S'inscrire
         if(!isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
+        #Sinon on crée un bouton déconnexion
         } else {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
+        #On récupère la vue correspondante
         $data->content = 'ajoutView.php';
+        #On appelle la vue principale
         require_once "view/mainView.php";
     }
 }

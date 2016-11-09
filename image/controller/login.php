@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'model/imageDAO.php';
 require_once 'model/utilisateurDAO.php';
 
@@ -13,6 +12,7 @@ class Login {
         $this->utilisateurDAO = new utilisateurDAO();
     }
     
+    #Accède au formulaire de connexion
     public function index() {
         $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
@@ -29,10 +29,15 @@ class Login {
         require_once 'view/mainView.php';
     }
     
+    #Gère la connexion
     public function login() {
+        #On récupère l'id de la première image
         $firstImageId = $this->imageDAO->getFirstImage()->getId();
+        #On vérifie que l'utilisateur a entré un pseudo et un mot de passe
         if(isset($_POST['pseudo']) && isset($_POST['password'])) {
+            #On récupère un objet utilisateur à partir du pseudo entré
             $utilisateur = $this->utilisateurDAO->getUserByPseudo($_POST['pseudo']);
+            #On vérifie si l'objet utilisateur est null et si le mot de passe entré correspond au mot de passe de l'utilisateur
             if($utilisateur != NULL && $_POST['password'] == $utilisateur->getPassword()){
                 $_SESSION['id'] = $utilisateur->getId();
                 $_SESSION['pseudo'] = $utilisateur->getPseudo();
@@ -48,6 +53,8 @@ class Login {
                 }
                 $data->content = "logedView.php";
                 require_once 'view/mainView.php';
+            #Si le pseuod n'existe pas ou si le mot de passe est incorecte 
+            #on revoie l'utilisateur sur le formulaire en lui affichant un messsage d'erreur
             } else {
                 $data->menu['Home'] = "index.php";
                 $data->menu['A Propos'] = "index.php?action=aPropos";
@@ -60,11 +67,13 @@ class Login {
                     $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
                 }
                 $data->content = "loginView.php";
-                echo 'Mauvais pseudo ou mot de passe';
+                #Création du message d'erreur
+                $data->messageErreur = "Mauvais Pseudo ou mot de passe";
                 require_once 'view/mainView.php';
             }
+        #Si aucun pseudo ou mot de passe n'est entré
+        #On renvoie l'utilisateur sur la page du formulaire avec un message d'erreur
         } else {
-            echo 'Entrez un pseudo et un mot de passe';
             $data->menu['Home'] = "index.php";
             $data->menu['A Propos'] = "index.php?action=aPropos";
             $size = 480;
@@ -75,13 +84,17 @@ class Login {
             } else {
                 $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
             }
-                $data->content = "logedView.php";
+            $data->content = "loginView.php";
+            $data->messageErreur = "Entrez un pseudo ou un mot de passe";
             require_once 'view/mainView.php';
         }
     }
+    #Déconnecte l'utilisateur
     public function deconnexion() {
         $firstImageId = $this->imageDAO->getFirstImage()->getId();
+        #On efface le contenu de $_SESSION
         $_SESSION = array();
+        #On détruit la session
         session_destroy();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
@@ -94,7 +107,8 @@ class Login {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
         $data->content = "homeView.php";
-        echo 'Deconnexion !';
+        #Message pour avertir l'utilisateur
+        $data->messageDeconnexion =  'Deconnexion !';
         require_once 'view/mainView.php';
     }
 }
