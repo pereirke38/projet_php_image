@@ -109,6 +109,8 @@ class PhotoMatrix {
          if(isset($_GET["nbImg"])) {
             $nbImg = $_GET["nbImg"];
         }
+        $image = $this->imageDAO->getRandomImage();
+        $imgId = $image->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
@@ -121,7 +123,6 @@ class PhotoMatrix {
         } else {
             $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
         }
-        $image = $this->imageDAO->getRandomImage();
         $data->tabData = $this->imageDAO->getImageList($image, $nbImg);
         $data->NextImgId = $this->imageDAO->jumpToImage($data->tabData[0], $nbImg)->getId();
         $data->PrevImgId = $this->imageDAO->jumpToImage($data->tabData[0], -$nbImg)->getId();

@@ -42,7 +42,7 @@
 	
 		
 		public function __construct() {
-                    $dsn = 'sqlite:/home/pereirke/Documents/Developpement_php/tp3/image/model/data/image.db'; // Data source name
+                    $dsn = 'sqlite:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/model/data/image.db'; // Data source name
                     $user= ''; // Utilisateur
                     $pass= ''; // Mot de passe
                     try {
