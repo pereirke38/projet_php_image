@@ -24,8 +24,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&$firstImageId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
@@ -62,8 +62,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
@@ -98,8 +98,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
@@ -140,8 +140,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
@@ -170,51 +170,18 @@ class Photo {
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];
         }
+        if(isset($_GET['zoom'])){
+            $size *= $_GET['zoom'];
+            $_GET['size'] = $size;
+        }
         $firstImageId = $this->imageDAO->getFirstImage()->getId();
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
-        if (isset($_SESSION['id'])) {
-            $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
-            $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
-            if($_SESSION['id'] == $this->imageDAO->getUtilisateur($this->imageDAO->getImage($imgId))){
-                $data->menu['Supprimer image'] = "index.php?controller=photo&action=supprimer&imgId=".$imgId;
-            }
-        }
-        if(!isset($_SESSION['id'])) {
-            $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
-            $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
-        } else {
-            $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
-        }
-        $data->imageURL = $this->imageDAO->getImage($imgId)->getPath();
-        $data->NextImgId = $this->imageDAO->getNextImage($this->imageDAO->getImage($imgId))->getId();
-        $data->PrevImgId = $this->imageDAO->getPrevImage($this->imageDAO->getImage($imgId))->getId();
-        $data->content = 'photoView.php';
-        require_once 'view/mainView.php';
-        
-    }
-    
-    #Effectue un dezzoom sur une image
-    function dezoom() {
-        if(isset($_GET["size"])){
-            $size = $_GET["size"];
-        }
-        if(isset($_GET["imgId"])) {
-            $imgId = $_GET["imgId"];
-        }
-        $firstImageId = $this->imageDAO->getFirstImage()->getId();
-        $data->menu['Home'] = "index.php";
-        $data->menu['A Propos'] = "index.php?action=aPropos";
-        $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
-        $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
-        $data->menu['More'] = "index.php?controller=photoMatrix&action=more&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;  
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
@@ -251,8 +218,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         #On verifie si l'utilisateur est connecté pour afficher les boutons qui lui permet d'ajouter ou de consulter ses images
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
@@ -294,8 +261,8 @@ class Photo {
         $data->menu['First'] = "index.php?controller=photo&action=First&$firstImageId&size=$size";
         $data->menu['Random'] = "index.php?controller=photo&action=Random&imgId=$imgId&size=$size";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=2";
-        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=".$size*1.15;
-        $data->menu['Zoom -'] = "index.php?controller=photo&action=dezoom&imgId=$imgId&size=".$size/1.15;
+        $data->menu['Zoom +'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=1.25";
+        $data->menu['Zoom -'] = "index.php?controller=photo&action=zoom&imgId=$imgId&size=$size&zoom=0.75";
         if (isset($_SESSION['id'])) {
             $data->menu['Mes Images'] = "index.php?controller=mesPhoto&action=index";
             $data->menu['Ajouter image'] = "index.php?controller=ajoutImage&action=index";
