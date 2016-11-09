@@ -264,7 +264,7 @@ class Photo {
     function index() {
         if(isset($_GET["size"])){
             $size = $_GET["size"];
-        }
+        }   
         $firstImageId = $this->imageDAO->getFirstImage()->getId();
         if(isset($_GET["imgId"])) {
             $imgId = $_GET["imgId"];

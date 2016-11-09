@@ -171,8 +171,8 @@
 				trigger_error("Erreur dans ImageDAO.getImageList: nombre d'images nul");
 			}
 			$id = $img->getId();
-			$max = $id+$nb;
-			while ($id < $this->size() && $id < $max) {
+                        $res = array();
+			while ($id < $this->size() && count($res) < $nb) {
                                 if($this->getImage($id) != NULL) {
                                     $res[] = $this->getImage($id);   
                                 }
@@ -187,6 +187,38 @@
                 
                 public function supprimerImage($imgId) {
                     $this->db->exec("DELETE FROM image WHERE id=".intval($imgId));
+                }
+                
+                public function getImageByUser($userId) {
+                    $s = $this->db->query('SELECT * FROM image WHERE userId='.$userId);
+                    if ($s) {
+                      /*$res = $s->fetch();
+                      $img = new Image($res['id'], $res['path']);
+                      return $img;*/
+                      $req = $s->fetchAll(PDO::FETCH_CLASS,"Image");
+                      if (count($req) == 0) {
+                          return NULL;
+                      } else {
+                          return $req;
+                      }
+                    } else {
+                      print "Error in getImage. id=".$id."<br/>";
+                      $err= $this->db->errorInfo();
+                      print $err[2]."<br/>";
+                    }
+                }
+                public function addImage($path, $cat, $com, $userId){
+                    // Récupère le dernier ID d'image
+                    $id = $this->size()+1;
+
+                    $stmt = $this->db->prepare("INSERT INTO image (id, path, category, comment, userId) VALUES (:id, :path, :category, :comment, :userId)");
+                    $stmt->bindParam(':id', $id);
+                    $stmt->bindParam(':path', $path);
+                    $stmt->bindParam(':category', $cat);
+                    $stmt->bindParam(':comment', $com);
+                    $stmt->bindParam(':userId', $userId);
+
+                    return $stmt->execute();
                 }
 	}
 	

@@ -3,33 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/data/image</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/mainView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/photo.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/utilisateurDAO.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/data.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/photoMatrix.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/inscription.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/image.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/index.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/dezoom.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/loginView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/photoView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/photoMatrixView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/home.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/homeView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/viewPhotoMatrix.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/style.css</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/inscriptionView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/zoom.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/controller/login.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/data/imageDB.txt</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/viewPhoto.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/utilisateur.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/imageDAO.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/logedView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/view/aProposView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3/image/model/data/create.sql</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/home.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/view/mesPhotoView.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/model/imageDAO.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/photo.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/ajoutImage.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/view/ajoutView.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/mesPhoto.php</file>
         </group>
     </open-files>
 </project-private>

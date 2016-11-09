@@ -17,7 +17,11 @@
             $s = $this->db->query('SELECT * FROM utilisateur WHERE id='.$id);
             if($s) {
                 $req = $s->fetchAll(PDO::FETCH_CLASS,"Utilisateur");
-                return $req[0];
+                if (count($req) == 0) {
+                    return NULL;
+                } else {
+                    return $req[0];
+                }
             } else {
                 print "Error in getUserById. id=".$id."<br/>";
                 $err= $this->db->errorInfo();
@@ -29,7 +33,11 @@
             $s = $this->db->query('SELECT * FROM utilisateur WHERE pseudo=\''.$pseudo.'\'');
             if($s) {
                 $req = $s->fetchAll(PDO::FETCH_CLASS,"Utilisateur");
-                return $req[0];
+                if (count($req) == 0) {
+                    return NULL;
+                } else {
+                    return $req[0];
+                }
             } else {
                 print "Error in getUserByPseudo. pseudo=".$pseudo."<br/>";
                 $err= $this->db->errorInfo();

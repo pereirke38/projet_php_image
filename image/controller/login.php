@@ -40,7 +40,7 @@ class Login {
                 $data->menu['A Propos'] = "index.php?action=aPropos";
                 $size = 480;
                 $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
-                if(isset($_SESSION['id'])) {
+                if(!isset($_SESSION['id'])) {
                     $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                     $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
                 } else {
@@ -49,18 +49,18 @@ class Login {
                 $data->content = "logedView.php";
                 require_once 'view/mainView.php';
             } else {
-                $data->content = "logedView.php";
-                echo 'Mauvais pseudo ou mot de passe';
                 $data->menu['Home'] = "index.php";
                 $data->menu['A Propos'] = "index.php?action=aPropos";
                 $size = 480;
                 $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
-                if(isset($_SESSION['id'])) {
+                if(!isset($_SESSION['id'])) {
                     $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                     $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
                 } else {
                     $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
                 }
+                $data->content = "loginView.php";
+                echo 'Mauvais pseudo ou mot de passe';
                 require_once 'view/mainView.php';
             }
         } else {
@@ -69,7 +69,7 @@ class Login {
             $data->menu['A Propos'] = "index.php?action=aPropos";
             $size = 480;
             $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
-            if(isset($_SESSION['id'])) {
+            if(!isset($_SESSION['id'])) {
                 $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                 $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
             } else {
@@ -87,7 +87,7 @@ class Login {
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $size = 480;
         $data->menu['Voir Photos'] = "index.php?controller=photo&action=First&imgId=$firstImageId&size=$size";
-        if(isset($_SESSION['id'])) {
+        if(!isset($_SESSION['id'])) {
             $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
             $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
         } else {

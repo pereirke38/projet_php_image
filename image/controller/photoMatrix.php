@@ -22,7 +22,7 @@ class PhotoMatrix {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
-        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size&nbImg=$nbImg&imgId=$imgId";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=1&nbImg=".$nbImg*2;
         $data->menu['Less'] = "index.php?controller=photoMatrix&action=less&imgId=$imgId&nbImg=".$nbImg/2;
         if(!isset($_SESSION['id'])) {
@@ -52,7 +52,7 @@ class PhotoMatrix {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
-        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size&nbImg=$nbImg&imgId=$imgId";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=".$nbImg*2;
         $data->menu['Less'] = "index.php?controller=photoMatrix&action=less&imgId=$imgId&nbImg=".$nbImg/2;
         if(!isset($_SESSION['id'])) {
@@ -82,7 +82,7 @@ class PhotoMatrix {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
-        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size&nbImg=.$nbImg&imgId=$imgId";
         $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=".$nbImg*2;
         $data->menu['Less'] = "index.php?controller=photoMatrix&action=less&imgId=$imgId&nbImg=".$nbImg/2;
         if(!isset($_SESSION['id'])) {
@@ -100,7 +100,33 @@ class PhotoMatrix {
     }
     
     function Random() {
-        
+        if(isset($_GET["size"])){
+            $size = $_GET["size"];
+        }
+        if(isset($_GET["imgId"])) {
+            $imgId = $_GET["imgId"];
+        }
+         if(isset($_GET["nbImg"])) {
+            $nbImg = $_GET["nbImg"];
+        }
+        $data->menu['Home'] = "index.php";
+        $data->menu['A Propos'] = "index.php?action=aPropos";
+        $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&imgId=$imgId&size=$size&nbImg=$nbImg&imgId=$imgId";
+        $data->menu['More'] = "index.php?controller=photoMatrix&action=more&size=$size&imgId=$imgId&nbImg=".$nbImg*2;
+        $data->menu['Less'] = "index.php?controller=photoMatrix&action=less&imgId=$imgId&nbImg=".$nbImg/2;
+        if(!isset($_SESSION['id'])) {
+            $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
+            $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
+        } else {
+            $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
+        }
+        $image = $this->imageDAO->getRandomImage();
+        $data->tabData = $this->imageDAO->getImageList($image, $nbImg);
+        $data->NextImgId = $this->imageDAO->jumpToImage($data->tabData[0], $nbImg)->getId();
+        $data->PrevImgId = $this->imageDAO->jumpToImage($data->tabData[0], -$nbImg)->getId();
+        $data->content = 'photoMatrixView.php';
+        require_once 'view/mainView.php';
     } 
     
     function more() {
@@ -121,7 +147,7 @@ class PhotoMatrix {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
-        $data->menu['Random'] = "index.php?controller=photo&action=Random&size=$size";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&size=$size&nbImg=$nbImg&imgId=$imgId";
         $data->tabData = $this->imageDAO->getImageList($this->imageDAO->getImage($imgId), $nbImg);
         $data->NextImgId = $this->imageDAO->jumpToImage($data->tabData[0], $nbImg)->getId();
         $data->PrevImgId = $this->imageDAO->jumpToImage($data->tabData[0], -$nbImg)->getId();
@@ -152,7 +178,7 @@ class PhotoMatrix {
         $data->menu['Home'] = "index.php";
         $data->menu['A Propos'] = "index.php?action=aPropos";
         $data->menu['First'] = "index.php?controller=photoMatrix&action=First&imgId=1&size=$size&nbImg=$nbImg";
-        $data->menu['Random'] = "index.php?controller=photo&action=Random&size=$size";
+        $data->menu['Random'] = "index.php?controller=photoMatrix&action=Random&size=$size&nbImg=$nbImg&imgId=$imgId";
         $data->tabData = $this->imageDAO->getImageList($this->imageDAO->getImage($imgId), $nbImg);
         $data->NextImgId = $this->imageDAO->jumpToImage($data->tabData[0], $nbImg)->getId();
         $data->PrevImgId = $this->imageDAO->jumpToImage($data->tabData[0], -$nbImg)->getId();
