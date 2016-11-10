@@ -1,6 +1,8 @@
 <div id="corps">
 			<?php 
-                                
+                                if(isset($_GET["size"])){
+                                    $size = $_GET["size"];
+                                }
                                 print "<p>\n";
 				print "<a href=\"index.php?controller=mesPhoto&action=prev&size=$size&max=$data->max\">Prev</a> ";
 				print "<a href=\"index.php?controller=mesPhoto&action=next&action=next&size=$size&max=$data->max\">Next</a> ";

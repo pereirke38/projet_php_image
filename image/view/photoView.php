@@ -6,8 +6,13 @@
 				print "</p>\n";
                                 if(isset($_GET["size"])) {
                                     $size = $_GET["size"];
+                                } else {
+                                    $size = 480;
                                 }
 				print "<img id=\"singlePicture\" src=\"$data->imageURL\" width=$size\"/>";
-			?>		
+                                if(isset($data->messageSupression)) {
+                                    print "<p>".$data->messageSupression."</p>";
+                                }    
+                        ?>		
 </div>
 

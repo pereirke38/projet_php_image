@@ -1,4 +1,5 @@
 <?php
+    require_once 'data.php';
     require_once 'model/imageDAO.php';
     class mesPhoto {
 
@@ -8,31 +9,29 @@
             $this->imageDAO = new imageDAO();
         }
         
-        #Affiche la première page des images de l'utilisateur
-        public function index() {
-            if(isset($_GET["size"])){
-                $size = $_GET["size"];
-            }
-            #Calcul de la taille de l'image
+        function createMenu() {
             $size = 480/sqrt(20);
-            $firstImageId = $this->imageDAO->getFirstImage()->getId();
-            if(isset($_GET["imgId"])) {
-                $imgId = $_GET["imgId"];
-            } else {
-                $imgId = $firstImageId;
-            }
-             if(isset($_GET["nbImg"])) {
-                $nbImg = $_GET["nbImg"];
-            }
+            $_GET["size"] = $size;
             $data->menu['Home'] = "index.php";
             $data->menu['A Propos'] = "index.php?action=aPropos";
-            $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&&size=$size";
+            $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=480";
+            return $data->menu;
+        }
+        
+        function createMenuHeader() {
             if(!isset($_SESSION['id'])) {
                 $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
                 $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
             } else {
                 $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
             }
+            return $data->menuHeader;
+        }
+        #Affiche la première page des images de l'utilisateur
+        public function index() {
+            $data = new Data();
+            $data->menu = $this->createMenu();
+            $data->menuHeader = $this->createMenuHeader();
             #Variable d'iteration
             $data->iter = 0;
             #Nombre d'images à afficher par pages
@@ -49,24 +48,13 @@
         
         #Permet de passer à la page suivante de l'album de l'utilisateur
         public function next() {
-            if(isset($_GET["size"])){
-                $size = $_GET["size"];
-            }
-            $size = 480/sqrt(20);
-            $firstImageId = $this->imageDAO->getFirstImage()->getId();
             #On récupère le nombre maximale pour l'iteration
             if(isset($_GET['max'])) {
                 $max = $_GET["max"];
             }
-            $data->menu['Home'] = "index.php";
-            $data->menu['A Propos'] = "index.php?action=aPropos";
-            $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=$size";
-            if(!isset($_SESSION['id'])) {
-                $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
-                $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
-            } else {
-                $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
-            }
+            $data = new Data();
+            $data->menu = $this->createMenu();
+            $data->menuHeader = $this->createMenuHeader();
             #iter prend l'ancienne valeur de max
             $data->iter = $max;
             #On augmente max de 24 pour continuer à afficher 24 images
@@ -91,24 +79,13 @@
         
         #Permet à l'utilisateur d'accéder à la page précédente de son album
         public function prev() {
-            if(isset($_GET["size"])){
-                $size = $_GET["size"];
-            }
-            $size = 480/sqrt(20);
-            $firstImageId = $this->imageDAO->getFirstImage()->getId();
             #On récupère la valeure de max
             if(isset($_GET['max'])) {
                 $max = $_GET["max"];
             }
-            $data->menu['Home'] = "index.php";
-            $data->menu['A Propos'] = "index.php?action=aPropos";
-            $data->menu['Voir Photos'] = "index.php?controller=photo&action=index&size=$size";
-            if(!isset($_SESSION['id'])) {
-                $data->menuHeader['Identification'] = "index.php?controller=login&action=index";
-                $data->menuHeader['S\'inscrire'] = "index.php?controller=inscription&action=index";
-            } else {
-                $data->menuHeader['Déconnexion'] = "index.php?controller=login&action=deconnexion";
-            }
+            $data = new Data();
+            $data->menu = $this->createMenu();
+            $data->menuHeader = $this->createMenuHeader();
             $data->max = $max - 24;
             
             $data->tabData = $this->imageDAO->getImageByUser($_SESSION['id']);
