@@ -3,7 +3,7 @@
     
     class utilisateurDAO {
         public function __construct() {
-            $dsn = 'sqlite:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/model/data/image.db';
+            $dsn = 'sqlite:model/data/image.db';
             $user = '';
             $pass = '';
             try {

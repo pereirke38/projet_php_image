@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/home.php</file>
             <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/view/mesPhotoView.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/model/imageDAO.php</file>
             <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/photo.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/ajoutImage.php</file>
-            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/view/ajoutView.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/photoMatrix.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/index.php</file>
+            <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/view/photoView.php</file>
             <file>file:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/controller/mesPhoto.php</file>
         </group>
     </open-files>

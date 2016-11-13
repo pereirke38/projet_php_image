@@ -42,7 +42,8 @@
 	
 		
 		public function __construct() {
-                    $dsn = 'sqlite:/home/pereirke/Documents/Developpement_php/tp3_bis/projet_php_image/image/model/data/image.db'; // Data source name
+                   // define('DB_PATH', $_SERVER['DOCUMENT_ROOT'] . '/data/image')
+                    $dsn = 'sqlite:model/data/image.db'; // Data source name
                     $user= ''; // Utilisateur
                     $pass= ''; // Mot de passe
                     try {
